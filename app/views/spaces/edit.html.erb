@@ -1,0 +1,36 @@
+<div class="container">
+  <%= form_for @space do |f| %> 
+      <div class="form-group">
+        <label for="inputSpace">会場名</label>
+        <div><%= f.text_field :space, autofocus: true, id:"inputSpace", placeholder:"space"%></div>
+        </div>
+      <div class="form-group">
+        <label for="inputPlace">場所</label>
+        <div><%= f.text_field :place, autofocus: true, id:"inputPlace", placeholder:"place"%></div>
+      </div>
+      <div class="form-group">
+        <label for="inputFacility">付帯設備</label>
+        <div><%= f.text_field :facility, autofocus: true, id:"inputFacility", placeholder:"facility"%></div>
+      </div>
+      <div class="form-group">
+        <label for="inputCategory">会場の広さ（カテゴリ）</label>
+        <div><%= f.text_field :category, autofocus: true, id:"inputCategory", placeholder:"category"%></div>
+      </div>
+      <div class="form-group">
+        <label for="inputPrice">料金</label>
+        <div><%= f.text_field :price, autofocus: true, id:"inputPlice", placeholder:"price"%></div>
+      </div>
+      <div class="form-group">
+        <label for="inputPayment">支払方法</label>
+        <div><%= f.select :payment, [["当日精算", "当日精算"], ["事前払込", "事前払込"], ["振込", "振込"]], include_blank: "選択して下さい" %>
+      </div>
+      <div class="form-group">
+        <label for="inputOther">その他</label>
+        <div><%= f.text_field :other, autofocus: true, id:"inputOther", placeholder:"other"%></div>
+        </div>
+            
+    		  <%= f.submit "会場情報を更新",class: "btn btn-secondary"  %>
+    		  <% end %>
+       </div>
+    </div>
+</div>

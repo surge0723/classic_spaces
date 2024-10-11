@@ -1,0 +1,61 @@
+<div class="container">
+    <%= form_with model: @space, local: true do |f| %>
+  <div class="<%= 'field_with_errors' if @space.errors[:space].any? %>">
+    <h3>会場名</h3>
+    <%= f.text_field :space %>
+    <% if @space.errors[:space].any? %>
+      <div class="error-message"><%= @space.errors[:space].first %></div>
+    <% end %>
+  </div>
+
+  <div class="<%= 'field_with_errors' if @space.errors[:place].any? %>">
+    <h3>場所</h3>
+    <%= f.text_field :place %>
+    <% if @space.errors[:place].any? %>
+      <div class="error-message"><%= @space.errors[:place].first %></div>
+    <% end %>
+  </div>
+  
+  <div class="<%= 'field_with_errors' if @space.errors[:category].any? %>">
+    <h3>会場の広さ（カテゴリ）</h3>
+    <%= f.select :category, [["大区分（オーケストラ練習）", "大区分（オーケストラ練習）"], ["中区分（セクション練習）", "中区分（セクション練習）"], ["小区分（パート練習）", "小区分（パート練習）"]], include_blank: "選択して下さい" %>
+    <% if @space.errors[:category].any? %>
+      <div class="error-message"><%= @space.errors[:category].first %></div>
+    <% end %>
+  </div>
+
+  <div class="<%= 'field_with_errors' if @space.errors[:facility].any? %>">
+    <h3>付帯設備</h3>
+    <%= f.text_area :facility %>
+    <% if @space.errors[:facility].any? %>
+      <div class="error-message"><%= @space.errors[:facility].first %></div>
+    <% end %>
+  </div>
+
+  <div class="<%= 'field_with_errors' if @space.errors[:price].any? %>">
+    <h3>使用料</h3>
+    <%= f.text_field :price %>
+    <% if @space.errors[:price].any? %>
+      <div class="error-message"><%= @space.errors[:price].first %></div>
+    <% end %>
+  </div>
+
+  <div class="<%= 'field_with_errors' if @space.errors[:payment].any? %>">
+    <h3>支払方法</h3>
+    <%= f.select :payment, [["当日精算", "当日精算"], ["事前払込", "事前払込"], ["銀行振込", "銀行振込"]], include_blank: "選択して下さい" %>
+    <% if @space.errors[:payment].any? %>
+      <div class="error-message"><%= @space.errors[:payment].first %></div>
+    <% end %>
+  </div>
+
+  <div class="<%= 'field_with_errors' if @space.errors[:other].any? %>">
+    <h3>その他注意事項</h3>
+    <%= f.text_area :other %>
+    <% if @space.errors[:other].any? %>
+      <div class="error-message"><%= @space.errors[:other].first %></div>
+    <% end %>
+  </div>
+
+  <%= f.submit 'Create Space', class: "btn btn-success btn-sm" %>
+<% end %>
+</div>

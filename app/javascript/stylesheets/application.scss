@@ -1,1 +1,17 @@
 @use '~bootstrap/scss/bootstrap';
+.field_with_errors input,
+.field_with_errors textarea,
+.field_with_errors select {
+  border: 2px solid red;
+  background-color: #fdd; /* 背景色を薄い赤に */
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+}
+
+body {
+  background-color:#f5f5f5;
+}

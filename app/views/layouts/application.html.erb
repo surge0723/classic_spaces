@@ -24,49 +24,44 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               
-      <% if user_signed_in? %>
-       <li class="nav-item">
-        <%= link_to spaces_path, class: 'nav-link text-light' do %>
-          <i class="fa-solid fa-house"></i> Home
-        <% end %>
-        </li>
+        <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to spaces_path, class: 'nav-link text-light' do %>
-          <i class="fa-solid fa-users"></i> Users
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to spaces_path, class: 'nav-link text-light' do %>
-          <i class="fa-solid fa-book-open"></i> Spaces
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
-          <i class="fa-solid fa-right-from-bracket"></i> Log out
-          <% end %>
-        </li>
-        
-          <% else %>
+            <%= link_to new_space_path, class: 'nav-link text-light' do %>
+             新規投稿
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to user_path(current_user), class: 'nav-link text-light' do %>
+            Myページ
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to spaces_path, class: 'nav-link text-light' do %>
+            投稿一覧
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
+             ログアウト
+            <% end %>
+          </li>
           
-           <li class="nav-item">
-            <%= link_to root_path, class: 'nav-link text-light' do %>
-              <i class="fa-solid fa-house"></i> Home
+            <% else %>
+             <li class="nav-item">
+            <%= link_to users_guest_sign_in_path, method: :post,class: 'nav-link text-light' do %>
+            ゲストログイン
             <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to about_path, class: 'nav-link text-light' do %>
-              <i class="fa-solid fa-link"></i> About
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
-            <i class="fa-solid fa-user-plus"></i>Sign up
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
-            <i class="fa-solid fa-right-to-bracket"></i>Log in
-            <% end %>
+            </li>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
+              新規登録
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
+              ログイン
+              <% end %>
           </li>
           </div>
         </div>
@@ -84,14 +79,20 @@
     </main>
   </body>
   
-    <footer style="background-color: #ebebeb;">
-      <div class="container mt-5">
-  	    <div class="row">
-    	    <div class="mx-auto">
-    		    <p>Kota Ikezaki</p>
-    		    <p>問い合わせ先：ikezakiXXXX@XXXXXXXX.com</p>
-  	      </div>
-        </div>
+  <% if user_signed_in? %>
+  <div class="container">
+    <%= button_to "1つ前の画面に戻る", "#", onclick: "history.back(); return false;", class: "btn btn-secondary mb-3" %>
+  </div>
+  <% end %>
+  
+  <footer style="background-color: #ebebeb;">
+    <div class="container mt-5">
+	    <div class="row">
+  	    <div class="mx-auto">
+  		    <p>Kota Ikezaki</p>
+  		    <p>問い合わせ先：ikezakiXXXX@XXXXXXXX.com</p>
+	      </div>
       </div>
-  </footer>
+    </div>
+</footer>
 </html>
