@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @space = Space.new
     @spaces = @user.spaces
-    @spaces_list =current_user.spaces
+    @spaces_list =@user.spaces
   end
   
   def edit
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:notice] = "Your profile was successfully updated."
+      flash[:notice] = "プロフィールが更新されました"
       redirect_to @user
     else
       render :edit
