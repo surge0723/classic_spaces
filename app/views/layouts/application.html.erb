@@ -11,6 +11,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  
 
     <body class="d-flex flex-column vh-100">
     <header class="shadow-sm" style="background-color: #1f1f1d;">
@@ -78,7 +79,7 @@
     <main class="mb-auto">
     </main>
   </body>
-  
+
   <% if user_signed_in? %>
   <div class="container">
     <%= button_to "1つ前の画面に戻る", "#", onclick: "history.back(); return false;", class: "btn btn-secondary mb-3" %>

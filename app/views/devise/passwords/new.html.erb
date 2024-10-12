@@ -1,16 +1,31 @@
-<h2>Forgot your password?</h2>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/users/sign_in">ログイン</a></li>
+    <li class="breadcrumb-item"><a href="/users/password/new">パスワードリセット</a></li>
+  </ol>
+</nav>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <h2>パスワードを忘れた場合</h2>
+      
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+      
+        <div class="field">
+          <%= f.label :メールアドレス %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+      
+        <div class="actions">
+          <%= f.submit "登録メールアドレスに再設定案内を送る" %>
+        </div>
+      <% end %>
+      
+      <%= render "devise/shared/links" %>
+    </div>  
+  </div>  
+</div>

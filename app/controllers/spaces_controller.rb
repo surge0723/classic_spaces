@@ -1,5 +1,6 @@
 class SpacesController < ApplicationController
    before_action :ensure_normal_user, only: :new
+   
   def new
     @space=Space.new
   end
@@ -37,7 +38,7 @@ end
   def update
     @space=Space.find(params[:id])
     if @space.update(space_params)
-      flash[:otice]="会場情報を上書きしました！"
+      flash[:notice]="会場情報を上書きしました！"
       redirect_to @space
     else
       render:edit
@@ -57,7 +58,7 @@ end
   
   def ensure_normal_user
     if current_user.email == 'guest@example.com'
-      flash[:notice] = "ゲストユーザーは、新規投稿ができません。"
+      flash[:alert] = "ゲストユーザーは、新規投稿ができません。"
       redirect_to spaces_path
     end
   end
