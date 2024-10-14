@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
- before_action :ensure_normal_user, only: :edit
+ before_action :ensure_normal_user, only: [:edit,:destroy]
  
   def show
     @user = User.find(params[:id])
@@ -25,6 +25,7 @@ class UsersController < ApplicationController
       flash[:notice] = "プロフィールが更新されました"
       redirect_to @user
     else
+      flash.now[:alert] = "不足項目があります。"
       render :edit
     end
   end

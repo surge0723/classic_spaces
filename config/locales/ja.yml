@@ -1,0 +1,48 @@
+ja:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "メールアドレスを入力してください"
+            password:
+              blank: "パスワードを入力してください"
+            name:
+              blank: "ユーザー名を入力してください"
+              
+  errors:
+    format: "%{message}" # エラーメッセージの前後に余計なフィールド名が表示されないように設定
+    messages:
+      not_saved:
+        one: "エラーが発生しました。次の項目を確認してください:"
+        other: "%{count} 件のエラーが発生しました。次の項目を確認してください:"
+
+  devise:
+    registrations:
+      user:
+        sign_up:
+          success: "ユーザー登録が成功しました。"
+          failure: "ユーザー登録に失敗しました。"
+    failure: "サインインに失敗しました。"
+    passwords:
+      send_instructions: "パスワードリセットの手続きが必要です。"
+      
+      
+  devise:
+    failure:
+      user:
+        invalid: "メールアドレスまたはパスワードが正しくありません"
+      invalid: "メールアドレスまたはパスワードが正しくありません"
+      
+      
+  errors:
+    format: "%{message}"
+    messages:
+      not_saved:
+        one: "エラーが発生しました。次の項目を確認してください:"
+        other: "%{count} 件のエラーが発生しました。次の項目を確認してください:"
+      blank: "を入力してください"
+  devise:
+    failure:
+      invalid: "メールアドレスまたはパスワードが正しくありません"

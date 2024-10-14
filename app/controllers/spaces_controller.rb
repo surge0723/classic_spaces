@@ -10,8 +10,8 @@ class SpacesController < ApplicationController
   @space.user = current_user # 投稿したユーザーを設定
 
   if @space.save
-    flash[:notice] = "投稿を上書き保存しました"
-     redirect_to @space, notice: '投稿を上書き保存しました'
+    flash[:notice] = "投稿を保存しました"
+     redirect_to @space, notice: '投稿を保存しました'
   else
     flash[:alert] = "投稿に失敗しました。必須項目を入力してください。" 
     render :new
@@ -41,6 +41,7 @@ end
       flash[:notice]="会場情報を上書きしました！"
       redirect_to @space
     else
+      flash[:alert] = "投稿に失敗しました。必須項目を入力してください。" 
       render:edit
     end
   end
@@ -48,7 +49,7 @@ end
   def destroy
     space=Space.find(params[:id])
     space.destroy
-    redirect_to spaces_path
+    redirect_to  user_path(current_user)
   end
   
   private
