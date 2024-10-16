@@ -17,32 +17,39 @@ ja:
       not_saved:
         one: "エラーが発生しました。次の項目を確認してください:"
         other: "%{count} 件のエラーが発生しました。次の項目を確認してください:"
-
+      blank: "を入力してください"
+      
   devise:
     registrations:
       user:
         sign_up:
           success: "ユーザー登録が成功しました。"
           failure: "ユーザー登録に失敗しました。"
-    failure: "サインインに失敗しました。"
+      signed_up: "アカウント登録が完了しました。"
+      updated: "アカウント情報が更新されました。"
+      
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      user:
+        signed_in: "ログインしました。"
+        signed_out: "ログアウトしました。"
+
     passwords:
+      updated: "パスワードが更新されました。"
       send_instructions: "パスワードリセットの手続きが必要です。"
       
+    confirmations:
+      confirmed: "メールアドレスの確認が完了しました。"
       
-  devise:
     failure:
+      invalid: "メールアドレスまたはパスワードが正しくありません"
       user:
         invalid: "メールアドレスまたはパスワードが正しくありません"
-      invalid: "メールアドレスまたはパスワードが正しくありません"
-      
-      
-  errors:
-    format: "%{message}"
-    messages:
-      not_saved:
-        one: "エラーが発生しました。次の項目を確認してください:"
-        other: "%{count} 件のエラーが発生しました。次の項目を確認してください:"
-      blank: "を入力してください"
-  devise:
-    failure:
-      invalid: "メールアドレスまたはパスワードが正しくありません"
+      unauthenticated: "ログインが必要です。"
+      unconfirmed: "メールアドレスが確認されていません。"
+      locked: "アカウントがロックされています。"
+      not_found_in_database: "メールアドレスまたはパスワードが違います。"
+      timeout: "セッションの有効期限が切れました。もう一度ログインしてください。"
+      inactive: "アカウントが有効ではありません。"
+      last_attempt: "あと1回ログインに失敗するとアカウントがロックされます。"

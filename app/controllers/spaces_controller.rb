@@ -32,7 +32,14 @@ end
   end
 
   def edit
-    @space=Space.find(params[:id])
+    @space=Space.find_by(id:params[:id])
+      if @space.nil?
+        redirect_to spaces_path, alert: '投稿が見つかりません。' # エラーメッセージと共にリダイレクト
+      elsif @space.user_id != current_user.id
+          redirect_to spaces_path, alert: '他のユーザーの編集はできません。'
+      else
+        space=Space.find(params[:id])
+      end
   end
   
   def update

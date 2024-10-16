@@ -6,10 +6,18 @@ class UsersController < ApplicationController
     @space = Space.new
     @spaces = @user.spaces
     @spaces_list =@user.spaces
+  
   end
   
   def edit
-    @user = User.find(params[:id])
+   @user = User.find_by(id: params[:id])
+    if @user.nil?
+      redirect_to user_path(current_user), alert: 'ユーザーが見つかりません。' # エラーメッセージと共にリダイレクト
+    elsif @user.id != current_user.id
+      redirect_to user_path(current_user), alert: '他のユーザーの編集はできません。'
+    else
+      user = User.find(params[:id])
+    end
   end
   
   def index
