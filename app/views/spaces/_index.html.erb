@@ -1,0 +1,18 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>会場</th>
+      <th>場所</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% spaces.each do |space| %>
+      <tr>
+        <td><%= space.space %></td>
+        <td><%= space.place %></td>
+        <td><%= link_to 'Show', space, class: "space_#{space.id}" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

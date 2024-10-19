@@ -5,4 +5,18 @@ class Space < ApplicationRecord
     
     validates :space, :place, :facility, :price, :category, :payment, presence: true
     validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+    
+    
+  def self.search_for(content, method)
+    if method == 'perfect'
+      Space.where(space: content)
+    elsif method == 'forward'
+      Space.where('space LIKE ?', content+'%')
+    elsif method == 'backward'
+      Space.where('space LIKE ?', '%'+content)
+    else
+      Space.where('space LIKE ?', '%'+content+'%')
+    end
+  end
+  
 end
