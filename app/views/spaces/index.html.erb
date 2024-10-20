@@ -12,6 +12,7 @@
         <th>会場名</th>
         <th>場所</th>
         <th>詳細</th>
+        <th>保存する</th>
       </tr>
     </thead>
   <% @spaces.each do |space| %>
@@ -20,8 +21,9 @@
           <td><%= space.space %></td>
           <td><%= space.place %></td>
           <td><%= link_to '詳細',space_path(space.id) %></td>
-          <% end %>
+          <td><%= render "favorites/btn", space: space %></td>
       </tr>
+      <% end %>
     </tbody>
   </table>
 </div>
