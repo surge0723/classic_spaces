@@ -2,6 +2,7 @@ class Space < ApplicationRecord
     belongs_to :user
     has_many :favorites, dependent: :destroy
     has_many :favorite_posts, through: :favorites, source: :space
+    has_many :comments, dependent: :destroy
     
     enum payment: { 当日精算: 0, 事前払込: 1, 銀行振込: 2 }
     enum category: { 大区分（オーケストラ練習）: 0, 中区分（セクション練習）: 1, 小区分（パート練習）: 2 }

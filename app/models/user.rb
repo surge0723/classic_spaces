@@ -6,7 +6,7 @@ class User < ApplicationRecord
  validates :name, :email, presence: true
   has_many :spaces,dependent: :destroy
   has_many :favorites, dependent: :destroy
-
+  has_many :comments, dependent: :destroy
   
          
    def self.guest
