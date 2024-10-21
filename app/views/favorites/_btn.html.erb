@@ -1,0 +1,11 @@
+<% if space.favorited_by?(current_user) %>
+  <%= link_to space_favorites_path(space), method: :delete,  style: "color: red;" do %>
+    <i class="fa-regular fa-bookmark"></i>
+    <%= space.favorites.count %>
+  <% end %>
+<% else %>
+  <%= link_to space_favorites_path(space), method: :post do %>
+    <i class="fa-regular fa-bookmark"></i>
+    <%= space.favorites.count %>
+  <% end %>
+<% end %>

@@ -26,9 +26,9 @@ end
 
   def show
     @space = Space.find(params[:id])
-    @space_new=Space.new
+    @space_new= Space.new
     @user = @space.user
-
+    @comment = Comment.new
   end
 
   def edit

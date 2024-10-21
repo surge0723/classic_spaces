@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_12_094911) do
+ActiveRecord::Schema.define(version: 2024_10_20_045853) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "category", null: false
+    t.integer "user_id"
+    t.integer "space_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "space_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "space_id"], name: "index_favorites_on_user_id_and_space_id", unique: true
+  end
 
   create_table "spaces", force: :cascade do |t|
     t.string "space", null: false

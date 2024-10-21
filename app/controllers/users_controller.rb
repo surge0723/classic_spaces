@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @space = Space.new
     @spaces = @user.spaces
-    @spaces_list =@user.spaces
+    @spaces_list = @user.spaces
   
   end
   
