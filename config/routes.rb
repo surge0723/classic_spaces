@@ -6,24 +6,26 @@ Rails.application.routes.draw do
   
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
-    resources :users, only: [:destroy] # ここを追加
+    get 'dashboard/show/:id', to: 'dashboards#show', as: 'dashboard_show'
+    resources :users, only: [:show,:destroy] 
   end
   
-  devise_for :users
-  resources:spaces
-  resources:users
-  root to: 'homes#top'
-  get '/about' => 'homes#about'
-  get 'search', to: 'searches#search'
+  scope module: :public do
+    devise_for :users
+    root to: 'homes#top'
+    get '/about' => 'homes#about'
+    resources:spaces
+    resources:users
+    get 'search', to: 'searches#search'
+    resources :spaces do
+      resources :favorites, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
+    end
+  end
+  
   
   #ゲストログイン用ルート
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
-  
-  resources :spaces do
-    resource :favorites, only: [:create, :destroy]
-    resources :comments, only: [:create, :destroy]
-end
-
 end

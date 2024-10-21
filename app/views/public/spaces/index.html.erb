@@ -16,13 +16,13 @@
         <th>コメント数</th>
       </tr>
     </thead>
-  <% @spaces.each do |space| %>
+    <% @spaces.each do |space| %>
     <tbody>
       <tr>
           <td><%= space.space %></td>
           <td><%= space.place %></td>
           <td><%= link_to '詳細',space_path(space.id) %></td>
-          <td><%= render "favorites/btn", space: space %></td>
+          <td><%= render "public/favorites/btn", space: space %></td>
           <td><%= space.comments.count %></td>
       </tr>
       <% end %>

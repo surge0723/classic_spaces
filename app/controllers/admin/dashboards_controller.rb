@@ -4,4 +4,9 @@ class Admin::DashboardsController < ApplicationController
     def index
         @users = User.all
     end
+    
+    def show
+    @user = User.find(params[:id])
+    @spaces_list = @user.spaces
+    end
 end

@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class Public::CommentsController < ApplicationController
   def create
     space = Space.find(params[:space_id])
     comment = current_user.comments.new(space_comment_params)

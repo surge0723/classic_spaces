@@ -1,4 +1,4 @@
-class FavoritesController < ApplicationController
+class Public::FavoritesController < ApplicationController
   def create
     space = Space.find(params[:space_id])
     favorite = current_user.favorites.new(space_id: space.id)

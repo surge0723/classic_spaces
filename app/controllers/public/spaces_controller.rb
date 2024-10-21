@@ -1,4 +1,4 @@
-class SpacesController < ApplicationController
+class Public::SpacesController < ApplicationController
    before_action :ensure_normal_user, only: :new
    
   def new

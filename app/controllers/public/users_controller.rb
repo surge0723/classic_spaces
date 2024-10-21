@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Public::UsersController < ApplicationController
  before_action :ensure_normal_user, only: [:edit,:destroy]
  
   def show
