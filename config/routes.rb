@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources:users
     get 'search', to: 'searches#search'
     resources :spaces do
-      resources :favorites, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
   end
