@@ -1,0 +1,5 @@
+<%= form_with(model:[space, comment], local: true) do |f| %>
+    <%= f.select :category, [["評価", "評価"], ["追加情報", "追加情報"], ["改善点", "改善点"],["その他","その他"]], include_blank: "選択して下さい" %>
+    <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: "w-100" %>
+    <%= f.submit "送信" %>
+<% end %>

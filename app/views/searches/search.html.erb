@@ -1,0 +1,15 @@
+<% if @model == 'user' %>
+  <h3>検索対象："<%= @content %>"</h3>
+  <% if @records.any? %>
+    <%= render 'users/index', users: @records %>
+  <% else %>
+    <p>検索対象はありませんでした。</p>
+  <% end %>
+<% elsif @model == 'spaces' %>
+  <h3>検索対象："<%= @content %>"</h3>
+  <% if @records.any? %>
+    <%= render 'spaces/index', spaces: @records %>
+  <% else %>
+    <p>検索対象はありませんでした。</p>
+  <% end %>
+<% end %>
