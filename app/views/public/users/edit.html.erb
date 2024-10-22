@@ -1,12 +1,14 @@
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<div class="container">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
     <li class="breadcrumb-item"><%= link_to 'Myページ',user_path(current_user) %></a></li>
     <li class="breadcrumb-item">ユーザー情報編集</a></li>
   </ol>
 </nav>
-
-<div class="container">
+ <div class="row">
+<%= render "public/spaces/left" %>
+<div class="col-lg-9"> 
   <div class="row justify-content-center">
     <div class="col-md-6 text-center">
       <%= form_for @user do |f| %> 
@@ -23,4 +25,5 @@
          <% end %>
     </div>
   </div>
+</div>
 </div>

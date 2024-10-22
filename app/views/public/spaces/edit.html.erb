@@ -1,4 +1,5 @@
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<div class="container">
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
     <li class="breadcrumb-item"><a href="/spaces">投稿一覧</a></li>
@@ -6,11 +7,13 @@
     <li class="breadcrumb-item">投稿の編集</a></li>
   </ol>
 </nav>
+ <div class="row">
+<%= render "public/spaces/left" %>
 
-<div class="container">
+<div class="col-lg-9"> 
   <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-      <%= form_for @space do |f| %> 
+    <div class="col-md text-center">
+      <%= form_with model: @space, local: true do |f| %> 
           <div class="form-group">
             <label for="inputSpace">会場名</label>
             <div><%= f.text_field :space, autofocus: true, id:"inputSpace", placeholder:"space"%></div>

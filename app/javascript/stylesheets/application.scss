@@ -13,6 +13,20 @@
 }
 
 body {
-  background-color:#f5f5f5;
+  background-color:#f1efef;
+  color:#623c1d;
 }
 
+.white-text {
+    color:#fffff5; /* フォントカラーを白に設定 */
+}
+
+.btn-rounded {
+    border-radius: 2.0rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    transition: box-shadow 0.3s ease; /* ホバー時のアニメーション *//* 角の丸みの度合いを調整 */
+}
+
+.btn-rounded:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* ホバー時に影を強くする */
+}
