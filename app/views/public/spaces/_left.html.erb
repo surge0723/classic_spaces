@@ -1,10 +1,11 @@
-<div class="col-lg-3" style="background-color: #9b683e; padding: 20px; border-radius: 5px;">
-    <%= link_to new_space_path, class: 'btn btn-primary btn-rounded shadow',style: 'margin-bottom: 20px;' do %>
+<div class="col-lg-3 d-flex flex-column h-100" style="background-color: #9b683e; padding: 20px; border-radius: 5px;">
+    <%= link_to new_space_path, class: 'btn btn-primary btn-rounded shadow',style: 'margin-bottom: 40px;' do %>
         ＋新規投稿
     <% end %>
     
     <%= form_with url: search_path, method: :get, local: true do |f| %>
         <p class="white-text">
+            投稿の検索<br>
             検索の値：<%= f.text_field :content, class: 'form-control' %><br>
             検索対象：<%= f.select :model, options_for_select({ "ユーザー" => "user", "会場名" => "spaces" }), { class: 'form-control' } %><br>
             検索方法：<%= f.select :method, options_for_select({ "完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial" }), { class: 'form-control' } %><br>

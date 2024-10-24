@@ -1,0 +1,28 @@
+<div class="container">
+  <h3>保存した投稿一覧</h3>
+
+  <% if @favorites.any? %>
+    <table class="table table-hover custom-font-color">
+      <thead>
+        <tr>
+          <th>会場名</th>
+          <th>場所</th>
+          <th>詳細</th>
+          <th>コメント数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @favorites.each do |favorite| %>
+          <tr>
+            <td><%= favorite.space.space %></td>
+            <td><%= favorite.space.place %></td>
+            <td><%= link_to '詳細', space_path(favorite.space) %></td>
+            <td><%= favorite.space.comments.count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>まだ保存した投稿はありません。</p>
+  <% end %>
+</div>

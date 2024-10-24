@@ -6,6 +6,11 @@ class Public::FavoritesController < ApplicationController
     redirect_to request.referer
   end
 
+  def index
+    @space = Space.find(params[:space_id])
+    @favorites = current_user.favorites.includes(:space)
+  end
+  
   def destroy
     space = Space.find(params[:space_id])
     favorite = current_user.favorites.find_by(space_id: space.id)

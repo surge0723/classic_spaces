@@ -1,66 +1,108 @@
 <div class="container">
+  <!-- パンくずリスト -->
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item">Myページ</a></li>
-  </ol>
-</nav>
-    
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item">Myページ</li>
+    </ol>
+  </nav>
 
-<div class="row">
-<%= render "public/spaces/left" %>
-<div class="col-lg-9"> 
- <table class="table table-hover table-inverse">
-    <thead>
-      <tr>
-      <th>Name</th>
-      <th>E-mail</th>
-      <th></th>
-      <th></th>
-      </tr>
-    </thead>
-      <tbody>
-        <tr>
-         <td><%= @user.name %></td>
-         <td><%= @user.email %></td>
-         <% if user_signed_in? && @user == current_user %>
-         <td><%=link_to edit_user_path(@user) ,class:"btn btn-outline-secondary btn-block" do %>
-          ユーザー情報の編集
-          <% end %>
-          </td>
-          <td><%= link_to "退会",user_path(current_user.id), class: "btn btn-outline-secondary btn-block", method: :delete, "data-confirm" => "本当に退会しますか？" %></td>
-          <% end %>
-          </td>
-        </tr>
-      </tbody>
-   </table>
-   
- <h2>投稿一覧</h2>
- <table class="table table-hover table-inverse">
-    <thead>
-      <tr>
-        <th>会場名</th>
-        <th>場所</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if @spaces_list.present? %>
-      <% @spaces_list.each do |space| %>
-        <tr>
-          <td><%= space.space %></td>
-          <td><%= space.place %></td>
-          <td><%= link_to '詳細',space_path(space.id) %></td>
-        </tr>
-      <% end %>
-       <% else %>
+  <div class="row">
+    <%= render "public/spaces/left" %>
+    <div class="col-lg-9">
+      <!-- ユーザー情報テーブル -->
+      <table class="table table-hover custom-font-color">
+        <h2>ユーザー情報</h2>
+        <thead>
           <tr>
-            <td colspan="2">投稿した練習場はありません。</td>
+            <th>ユーザー名</th>
+            <th>メールアドレス</th>
+            <th></th>
+            <th></th>
           </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @user.name %></td>
+            <td><%= @user.email %></td>
+            <% if user_signed_in? && @user == current_user %>
+              <td>
+                <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+                  ユーザー情報の編集
+                <% end %>
+              </td>
+              <td>
+                <%= link_to "退会", user_path(current_user.id), class: "btn btn-outline-secondary btn-block", method: :delete, "data-confirm" => "本当に退会しますか？" %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+
+   <div class="container mt-4">
+     <div class="tabs">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" id="spaces-list-tab" data-toggle="tab" href="#spaces-list" role="tab" aria-controls="spaces-list" >投稿一覧</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="saved-spaces-tab" data-toggle="tab" href="#saved-spaces" role="tab" aria-controls="saved-spaces" >保存した投稿</a>
+      </li>
+    </ul>
+
+  <div class="tab-content" id="spaceTabsContent">
+    <div class="tab-pane fade show active" id="spaces-list" role="tabpanel" aria-labelledby="spaces-list-tab">
+      <h2>投稿一覧</h2>
+      <table class="table table-hover custom-font-color">
+        <thead>
+          <tr>
+            <th>会場名</th>
+            <th>場所</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @spaces_list.present? %>
+            <% @spaces_list.each do |space| %>
+              <tr>
+                <td><%= space.space %></td>
+                <td><%= space.place %></td>
+                <td><%= link_to '詳細', space_path(space.id) %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="3">投稿した練習場はありません。</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tab-pane fade" id="saved-spaces" role="tabpanel" aria-labelledby="saved-spaces-tab">
+      <h2>保存した投稿</h2>
+      <% if @favorites.present? %>
+        <table class="table table-hover custom-font-color">
+          <thead>
+            <tr>
+              <th>会場名</th>
+              <th>場所</th>
+              <th>詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @favorites.each do |favorite| %>
+              <tr>
+                <td><%= favorite.space.space %></td>
+                <td><%= favorite.space.place %></td>
+                <td><%= link_to '詳細', space_path(favorite.space) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>まだ保存した投稿はありません。</p>
       <% end %>
-    </tbody>
-  </table>
- </div>
- </div>         
-</div>  
-         
+    </div>
+  </div>
+</div>

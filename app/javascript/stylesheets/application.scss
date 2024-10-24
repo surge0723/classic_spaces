@@ -17,6 +17,10 @@ body {
   color:#623c1d;
 }
 
+.custom-font-color {
+    color: #623c1d;
+}
+
 .white-text {
     color:#fffff5; /* フォントカラーを白に設定 */
 }
@@ -29,4 +33,32 @@ body {
 
 .btn-rounded:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* ホバー時に影を強くする */
+}
+
+
+.nav-tabs .nav-link {
+  color: #555;
+  background-color: #f8f9fa;
+  border: 1px solid transparent;
+  border-radius: 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: #e9ecef;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav-tabs .nav-link.active {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  border-bottom: 3px solid #007bff;
+}
+
+.nav-tabs .nav-item {
+  margin-right: 10px;
 }

@@ -25,11 +25,17 @@ end
   end
 
   def show
-    @space = Space.find(params[:id])
+    @space = Space.find_by(id: params[:id])
+      if @space.nil?
+      flash[:alert] = "指定された投稿は存在しません"
+      redirect_to spaces_path
+    else
     @space_new= Space.new
     @user = @space.user
     @comment = Comment.new
+    end
   end
+  
 
   def edit
     @space=Space.find_by(id:params[:id])

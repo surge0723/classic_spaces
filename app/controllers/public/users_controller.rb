@@ -6,7 +6,7 @@ class Public::UsersController < ApplicationController
     @space = Space.new
     @spaces = @user.spaces
     @spaces_list = @user.spaces
-  
+    @favorites = @user.favorites.includes(:space)
   end
   
   def edit

@@ -1,64 +1,94 @@
 <div class="container">
+  <!-- パンくずリスト -->
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item"><a href="/spaces">投稿一覧</a></li>
-    <li class="breadcrumb-item">投稿詳細</a></li>
-  </ol>
-</nav>
- <div class="row">
-<%= render "public/spaces/left" %>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/spaces">投稿一覧</a></li>
+      <li class="breadcrumb-item">投稿詳細</li>
+    </ol>
+  </nav>
 
-<div class="col-lg-9"> 
-    <table class="table table-hover table-inverse">
-      <tbody>
-        <tr>
-        <th>会場名</th>
-        <td><%= @space.space %></td>
-        </tr>
-        
-        <tr>
-        <th>場所</th>
-        <td><%= @space.place %></td>
-        </tr>
-        
-        <tr>
-        <th>付帯設備</th>
-        <td><%= @space.facility %></td>
-        </tr>
-       
-        <th>会場の広さ（カテゴリ）</th>
-        <td><%= @space.category %></td>
-        </tr>
-        
-        <tr>
-        <th>使用料</th>
-        <td><%= @space.price %></td>
-        </tr>
-        
-        <tr>
-        <th>支払方法</th>
-        <td><%= @space.payment %></td>
-        </tr>
-        
-        <th>その他備考</th>
-        <td><%= @space.other %></td>
-        </tr>
-        
-        <tr>
-        <th>投稿者</th>
-        <td><%= link_to @user.name, user_path(@user) %></td>
-        </tr>
-        
-        <% if @space.user == current_user %>
-          <td><a class="btn btn-sm btn-success" href="<%= edit_space_path(@space) %>">Edit</a></td>
-          <td><a data-confirm="投稿を消しますか？" class="btn btn-sm btn-danger " rel="nofollow" data-method="delete" href="<%=space_path(@space) %>">Destroy</a></td>
-          <% end %>
-        </tr>
-      </tbody>
-    </table>
-      <%= render "public/comments/index", space: @space %>
-      <%= render "public/comments/form", space: @space, comment: @comment %>
+  <div class="row">
+    <!-- 左側のサイドコンテンツ -->
+    <%= render "public/spaces/left" %>
+
+    <!-- メインコンテンツ -->
+
+    <div class="col-lg-9">
+    <h2>会場名：<%= @space.space %></h2>
+      <div class="container mt-4">
+        <!-- タブメニュー -->
+        <div class="tabs">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" id="spaces-details-tab" data-toggle="tab" href="#spaces-details" role="tab" aria-controls="spaces-details">投稿詳細</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="comment-lists-tab" data-toggle="tab" href="#comment-lists" role="tab" aria-controls="comment-lists">みんなのコメント</a>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="spaceTabsContent">
+            <!-- 投稿詳細タブの内容 -->
+            <div class="tab-pane fade show active" id="spaces-details" role="tabpanel" aria-labelledby="spaces-details-tab">
+              <table class="table table-hover custom-font-color">
+                <tbody>
+                  <tr>
+                    <th>会場名</th>
+                    <td><%= @space.space %></td>
+                  </tr>
+                  <tr>
+                    <th>場所</th>
+                    <td><%= @space.place %></td>
+                  </tr>
+                  <tr>
+                    <th>付帯設備</th>
+                    <td><%= @space.facility %></td>
+                  </tr>
+                  <tr>
+                    <th>会場の広さ（カテゴリ）</th>
+                    <td><%= @space.category %></td>
+                  </tr>
+                  <tr>
+                    <th>使用料</th>
+                    <td><%= @space.price %></td>
+                  </tr>
+                  <tr>
+                    <th>支払方法</th>
+                    <td><%= @space.payment %></td>
+                  </tr>
+                  <tr>
+                    <th>その他備考</th>
+                    <td><%= @space.other %></td>
+                  </tr>
+                  <tr>
+                    <th>投稿者</th>
+                    <td><%= link_to @user.name, user_path(@user) %></td>
+                  </tr>
+                  <% if @space.user == current_user %>
+                    <tr>
+                      <td>
+                        <a class="btn btn-sm btn-success" href="<%= edit_space_path(@space) %>">投稿の編集</a>
+                      </td>
+                      <td>
+                        <a data-confirm="投稿を消しますか？" class="btn btn-sm btn-danger" rel="nofollow" data-method="delete" href="<%= space_path(@space) %>">投稿の削除</a>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- みんなのコメントタブの内容 -->
+            <div class="tab-pane fade" id="comment-lists" role="tabpanel" aria-labelledby="comment-lists-tab">
+              <%= render "public/comments/index", space: @space %>
+            </div>
+          </div>
+
+          <!-- コメントフォーム -->
+          <%= render "public/comments/form", space: @space, comment: @comment %>
+        </div>
+      </div>
+    </div>
   </div>
-  </div>
-  </div>
+</div>

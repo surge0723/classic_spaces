@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get 'search', to: 'searches#search'
     resources :spaces do
       resource :favorites, only: [:create, :destroy]
+      resources :favorites, only: [:index,]
       resources :comments, only: [:create, :destroy]
     end
   end

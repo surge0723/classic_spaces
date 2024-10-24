@@ -1,51 +1,65 @@
 <div class="container">
+  <!-- パンくずリスト -->
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item"><a href="/spaces">投稿一覧</a></li>
-    <li class="breadcrumb-item"><td><%= link_to '投稿詳細',space_path(@space.id) %></a></li>
-    <li class="breadcrumb-item">投稿の編集</a></li>
-  </ol>
-</nav>
- <div class="row">
-<%= render "public/spaces/left" %>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/spaces">投稿一覧</a></li>
+      <li class="breadcrumb-item"><%= link_to '投稿詳細', space_path(@space.id) %></li>
+      <li class="breadcrumb-item active">投稿の編集</li>
+    </ol>
+  </nav>
 
-<div class="col-lg-9"> 
-  <div class="row justify-content-center">
-    <div class="col-md text-center">
-      <%= form_with model: @space, local: true do |f| %> 
-          <div class="form-group">
-            <label for="inputSpace">会場名</label>
-            <div><%= f.text_field :space, autofocus: true, id:"inputSpace", placeholder:"space"%></div>
+  <div class="row">
+    <%= render "public/spaces/left" %>
+
+    <div class="col-lg-9">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <!-- 投稿編集フォーム -->
+          <%= form_with model: @space, local: true do |f| %> 
+            <div class="form-group">
+              <label for="inputSpace">会場名</label>
+              <%= f.text_field :space, autofocus: true, id: "inputSpace", placeholder: "会場名", class: "form-control" %>
             </div>
-          <div class="form-group">
-            <label for="inputPlace">場所</label>
-            <div><%= f.text_field :place, autofocus: true, id:"inputPlace", placeholder:"place"%></div>
-          </div>
-          <div class="form-group">
-            <label for="inputFacility">付帯設備</label>
-            <div><%= f.text_field :facility, autofocus: true, id:"inputFacility", placeholder:"facility"%></div>
-          </div>
-          <div class="form-group">
-            <label for="inputCategory">会場の広さ（カテゴリ）</label>
-            <div><%= f.select :category, [["大区分（オーケストラ練習）", "大区分（オーケストラ練習）"], ["中区分（セクション練習）", "中区分（セクション練習）"], ["小区分（パート練習）", "小区分（パート練習）"]], include_blank: "選択して下さい" %></div>
-          </div>
-          <div class="form-group">
-            <label for="inputPrice">料金</label>
-            <div><%= f.text_field :price, autofocus: true, id:"inputPlice", placeholder:"price"%></div>
-          </div>
-          <div class="form-group">
-            <label for="inputPayment">支払方法</label>
-            <div><%= f.select :payment, [["当日精算", "当日精算"], ["事前払込", "事前払込"], ["振込", "振込"]], include_blank: "選択して下さい" %>
-          </div>
-          <div class="form-group">
-            <label for="inputOther">その他</label>
-            <div><%= f.text_field :other, autofocus: true, id:"inputOther", placeholder:"other"%></div>
+
+            <div class="form-group">
+              <label for="inputPlace">場所</label>
+              <%= f.text_field :place, id: "inputPlace", placeholder: "場所", class: "form-control" %>
             </div>
-                
-        		  <%= f.submit "会場情報を更新",class: "btn btn-secondary"  %>
-        		  <% end %>
-         </div>
+
+            <div class="form-group">
+              <label for="inputFacility">付帯設備</label>
+              <%= f.text_field :facility, id: "inputFacility", placeholder: "付帯設備", class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <label for="inputCategory">会場の広さ（カテゴリ）</label>
+              <%= f.select :category, [["大区分（オーケストラ練習）", "大区分（オーケストラ練習）"], 
+                                       ["中区分（セクション練習）", "中区分（セクション練習）"], 
+                                       ["小区分（パート練習）", "小区分（パート練習）"]], 
+                                       include_blank: "選択してください", class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <label for="inputPrice">料金</label>
+              <%= f.text_field :price, id: "inputPrice", placeholder: "料金", class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <label for="inputPayment">支払方法</label>
+              <%= f.select :payment, [["当日精算", "当日精算"], ["事前払込", "事前払込"], ["振込", "振込"]], 
+                            include_blank: "選択してください", class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <label for="inputOther">その他</label>
+              <%= f.text_field :other, id: "inputOther", placeholder: "その他備考", class: "form-control" %>
+            </div>
+
+            <%= f.submit "会場情報を更新", class: "btn btn-secondary mt-3" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

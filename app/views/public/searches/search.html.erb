@@ -1,31 +1,37 @@
 <div class="container">
+  <!-- パンくずリスト -->
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item">検索結果</a></li>
-  </ol>
-</nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">検索結果</li>
+    </ol>
+  </nav>
 
- <div class="row">
-<%= render "public/spaces/left" %>
+  <!-- メインコンテンツ -->
+  <div class="row">
+    <!-- 左サイドバー -->
+    <%= render "public/spaces/left" %>
 
-<div class="col-lg-9"> 
+    <!-- 検索結果表示エリア -->
+    <div class="col-lg-9">
+      <h3>検索対象："<%= @content %>"</h3>
 
-<% if @model == 'user' %>
-  <h3>検索対象："<%= @content %>"</h3>
-  <% if @records.any? %>
-    <%= render 'public/users/index', users: @records %>
-  <% else %>
-    <p>検索対象はありませんでした。</p>
-  <% end %>
-<% elsif @model == 'spaces' %>
-  <h3>検索対象："<%= @content %>"</h3>
-  <% if @records.any? %>
-    <%= render 'public/spaces/index', spaces: @records %>
-  <% else %>
-    <p>検索対象はありませんでした。</p>
-  <% end %>
-<% end %>
-</div>
-</div>
+      <!-- ユーザーの検索結果 -->
+      <% if @model == 'user' %>
+        <% if @records.any? %>
+          <%= render 'public/users/index', users: @records %>
+        <% else %>
+          <p>検索対象はありませんでした。</p>
+        <% end %>
+
+      <!-- 会場名の検索結果 -->
+      <% elsif @model == 'spaces' %>
+        <% if @records.any? %>
+          <%= render 'public/spaces/index', spaces: @records %>
+        <% else %>
+          <p>検索対象はありませんでした。</p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
