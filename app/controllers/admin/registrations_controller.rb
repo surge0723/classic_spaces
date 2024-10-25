@@ -3,7 +3,14 @@
 class Admin::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  protected
+   def after_sign_up_path_for(resource_or_scope)
+    admin_dashboards_path # ログアウト後にリダイレクトするパス
+  end
 
+  def redirect_if_authenticated
+    redirect_to root_path, alert: "すでにログインしています。" if admin_signed_in?
+  end
   # GET /resource/sign_up
   # def new
   #   super

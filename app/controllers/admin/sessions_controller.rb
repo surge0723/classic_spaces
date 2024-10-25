@@ -12,6 +12,7 @@ class Admin::SessionsController < Devise::SessionsController
    def after_sign_out_path_for(resource_or_scope)
     new_admin_session_path # ログアウト後にリダイレクトするパス
   end
+  
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

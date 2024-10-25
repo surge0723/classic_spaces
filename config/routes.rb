@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
-  devise_for :admin, skip: [:registrations, :password], controllers: {
-    sessions: 'admin/sessions'
-  }
+devise_for :admins, skip: [:passwords], controllers: {
+  sessions: 'admin/sessions',
+  registrations: 'admin/registrations'
+}
   
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
