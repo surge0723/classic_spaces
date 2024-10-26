@@ -35,16 +35,17 @@
         </tr>
       </thead>
       <tbody>
-        <% if @spaces_list.present? %>
-        <% @spaces_list.each do |space| %>
+        <% if @spaces_comment.present? %>
+        <% @spaces_comment.each do |comment| %>
           <tr>
-            <td><%= space.space %></td>
-            <td><%= space.place %></td>
+            <td><%= comment.space.space %></td>
+            <td><%= comment.category %></td>
+            <td><%= comment.comment %></td>
           </tr>
         <% end %>
          <% else %>
             <tr>
-              <td colspan="2">投稿した練習場はありません。</td>
+              <td colspan="2">投稿したコメントはありません。</td>
             </tr>
         <% end %>
       </tbody>
