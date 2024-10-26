@@ -8,5 +8,6 @@ class Admin::DashboardsController < ApplicationController
     def show
     @user = User.find(params[:id])
     @spaces_list = @user.spaces
+    @space_comment = @user.comments
     end
 end

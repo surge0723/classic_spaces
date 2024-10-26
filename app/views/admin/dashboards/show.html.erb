@@ -1,4 +1,5 @@
 <div class="container">
+<div style="padding-bottom: 20px;"></div>
     <h2><%= @user.name %> さんの投稿一覧</h2>
     <table class="table table-hover table-inverse">
       <thead>
@@ -22,6 +23,34 @@
         <% end %>
       </tbody>
     </table>
+    
+    <div style="padding-bottom: 20px;"></div>
+    <h2><%= @user.name %> さんのコメント一覧</h2>
+      <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th>会場名</th>
+          <th>区分</th>
+          <th>コメント内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @spaces_list.present? %>
+        <% @spaces_list.each do |space| %>
+          <tr>
+            <td><%= space.space %></td>
+            <td><%= space.place %></td>
+          </tr>
+        <% end %>
+         <% else %>
+            <tr>
+              <td colspan="2">投稿した練習場はありません。</td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    
     <%= link_to '会員一覧に戻る', admin_dashboards_path %>
     
 </div>
