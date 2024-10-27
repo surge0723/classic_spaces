@@ -1,0 +1,34 @@
+<div class="container">
+  <!-- パンくずリスト -->
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/spaces">投稿一覧</a></li>
+      <li class="breadcrumb-item">投稿詳細</li>
+    </ol>
+  </nav>
+  
+  <div class="row">
+    <!-- 左側のサイドコンテンツ -->
+    <%= render "public/spaces/left" %>
+
+    <!-- メインコンテンツ -->
+    <div class="col-lg-9">
+    <%= form_with model: @group, local: true do |f| %>
+    <div class="form-group">
+        <label for="inputName">グループ名</label>
+        <%= f.text_field :name, autofocus: true, id:"inputName", class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+        <label for="inputIntroduction">会場名</label>
+        <%= f.text_area :introduction, autofocus: true, id: "inputIntroduction", class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+    <%= f.submit class: 'btn btn-info' %>
+    </div>
+    
+    <% end %>
+  </div>
+</div> 

@@ -25,40 +25,44 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to user_path(current_user), class: 'nav-link text-light' do %>
-            Myページ
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to spaces_path, class: 'nav-link text-light' do %>
-            投稿一覧
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
-             ログアウト
-            <% end %>
-          </li>
-          
-            <% else %>
-             <li class="nav-item">
-            <%= link_to users_guest_sign_in_path, method: :post,class: 'nav-link text-light' do %>
-            ゲストログイン
-            <% end %>
-            </li>
-            </li>
-            <li class="nav-item">
-              <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
-              新規登録
-              <% end %>
-            </li>
-            <li class="nav-item">
-              <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
-              ログイン
-              <% end %>
-          </li>
+            <% if user_signed_in? %>
+              </li>
+              <li class="nav-item">
+                <%= link_to spaces_path, class: 'nav-link text-light' do %>
+                投稿一覧
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to groups_path, class: 'nav-link text-light' do %>
+                グループ一覧
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to user_path(current_user), class: 'nav-link text-light' do %>
+                Myページ
+                <% end %>
+              <li class="nav-item">
+                <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
+                 ログアウト
+                <% end %>
+              </li>
+                <% else %>
+                 <li class="nav-item">
+                <%= link_to users_guest_sign_in_path, method: :post,class: 'nav-link text-light' do %>
+                ゲストログイン
+                <% end %>
+                </li>
+                
+                <li class="nav-item">
+                  <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
+                  新規登録
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
+                  ログイン
+                <% end %>
+                </li>
           </div>
         </div>
         </nav>

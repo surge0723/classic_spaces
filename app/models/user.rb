@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :spaces,dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :group_users, dependent: :destroy
   
          
    def self.guest

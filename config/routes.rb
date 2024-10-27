@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'group/index'
+  get 'group/show'
+  get 'group/edit'
+  get 'group/new'
 devise_for :admins, skip: [:passwords], controllers: {
   sessions: 'admin/sessions',
   registrations: 'admin/registrations'
@@ -16,8 +20,11 @@ devise_for :admins, skip: [:passwords], controllers: {
     devise_for :users
     root to: 'homes#top'
     get '/about' => 'homes#about'
-    resources:spaces
+    resources:spaces      
     resources:users
+    resources :groups do
+      resource :group_users, only: [:create, :destroy]
+    end
     get 'search', to: 'searches#search'
     resources :spaces do
       resource :favorites, only: [:create, :destroy]
@@ -25,7 +32,6 @@ devise_for :admins, skip: [:passwords], controllers: {
       resources :comments, only: [:create, :destroy]
     end
   end
-  
   
   #ゲストログイン用ルート
   devise_scope :user do

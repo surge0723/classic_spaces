@@ -1,0 +1,52 @@
+<div class="container">
+  <!-- パンくずリスト -->
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/spaces">投稿一覧</a></li>
+      <li class="breadcrumb-item">投稿詳細</li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <!-- 左側のサイドコンテンツ -->
+    <%= render "public/spaces/left" %>
+
+    <!-- メインコンテンツ -->
+    <div class="col-lg-9">
+      <%= render 'layouts/errors', obj: @space %>
+      <h2>Group Detail</h2>
+      <table class='table table-hover table-inverse'>
+         <thead>
+          <tr>
+            <th>Name</th>
+            <th>Introduction</th>
+            <th>Members</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tr>
+          <td><%= @group.name %></td>
+          <td><%= @group.introduction %></td>
+          <td>
+             <% @group.users.each do |user| %>
+             <li style="list-style: none;"><%= user.name %></li>
+            <% end %>
+          </td>
+          
+          <td>
+            <% if @group.is_owned_by?(current_user) %>
+              <%= link_to 'Edit', edit_group_path(@group), class: "btn btn-sm btn-success" %>
+            <% elsif @group.includesUser?(current_user)%>
+              <%= link_to 'Leave this group', group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
+            <% else %>
+              <%= link_to 'Join this group', group_group_users_path(@group), method: :post, class: "btn btn-sm btn-success" %>
+            <% end %>
+          </td>
+        </tr>
+       </table>    
+    </div>
+  </div>
+</div>
+
