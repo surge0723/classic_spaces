@@ -9,6 +9,7 @@ devise_for :admins, skip: [:passwords], controllers: {
     get 'dashboards', to: 'dashboards#index'
     get 'dashboard/show/:id', to: 'dashboards#show', as: 'dashboard_show'
     resources :users, only: [:show,:destroy] 
+    resources :comments, only: [:destroy]
   end
   
   scope module: :public do

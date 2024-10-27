@@ -4,5 +4,9 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
- devise authentication_keys: [:email] # ここを追加
+ devise authentication_keys: [:email] 
+ 
+ module Admin
+  # Adminモジュールの再定義を修正する
+end
 end

@@ -10,4 +10,10 @@ class Admin::DashboardsController < ApplicationController
     @spaces_list = @user.spaces
     @spaces_comment = @user.comments.includes(:space) 
     end
+    
+    def destroy
+      @comment = Comment.find(params[:id])
+      @comment.destroy
+      redirect_to admin_dashboards_path, notice: 'コメントが削除されました。'
+    end
 end
