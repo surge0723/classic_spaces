@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'group/index'
-  get 'group/show'
-  get 'group/edit'
-  get 'group/new'
 devise_for :admins, skip: [:passwords], controllers: {
   sessions: 'admin/sessions',
   registrations: 'admin/registrations'
@@ -24,6 +20,8 @@ devise_for :admins, skip: [:passwords], controllers: {
     resources:users
     resources :groups do
       resource :group_users, only: [:create, :destroy]
+      resources :event_notices, only: [:new, :create]
+      get "event_notices" => "event_notices#sent"
     end
     get 'search', to: 'searches#search'
     resources :spaces do
