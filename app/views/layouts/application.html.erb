@@ -14,7 +14,7 @@
   
 
     <body class="d-flex flex-column vh-100">
-    <header class="shadow-sm" style="background-color: #623c1d;">
+    <header class="shadow-sm header-custom" style="background-color: #623c1d;">
       <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
           <a class="navbar-brand p-3" href="<%= root_path %>">ClassicSpaces</a>
@@ -26,6 +26,10 @@
             <ul class="navbar-nav ml-auto">
               
             <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to user_path(current_user), class: 'nav-link text-light' do %>
+                Myページ
+                <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to spaces_path, class: 'nav-link text-light' do %>
@@ -38,14 +42,11 @@
                 <% end %>
               </li>
               <li class="nav-item">
-                <%= link_to user_path(current_user), class: 'nav-link text-light' do %>
-                Myページ
-                <% end %>
-              <li class="nav-item">
                 <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
                  ログアウト
                 <% end %>
               </li>
+              
                 <% else %>
                  <li class="nav-item">
                 <%= link_to users_guest_sign_in_path, method: :post,class: 'nav-link text-light' do %>
@@ -69,12 +70,12 @@
       <% end %>
     </header>
   
-    <main class="mb-auto">
+    <main class="mb-auto  alert-custom">
       <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
+        <p class="alert alert-success  alert-custom"><%= notice %></p>
           <% end %>
       <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
+        <p class="alert alert-danger  alert-custom"><%= alert %></p>
           <% end %>
       <%= yield %>
     </main>

@@ -6,6 +6,19 @@
   background-color: #fdd; /* 背景色を薄い赤に */
 }
 
+.header-custom {
+  border-radius: 10px; /* 角を丸める */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8); /* 立体感のある影 */
+  margin-top: 10px; /* ヘッダーを下に10px移動 */
+  margin-left: 100px; /* 左に100pxの余白 */
+  margin-right: 100px; /* 右に100pxの余白 */
+}
+
+.alert-custom {
+  margin-left: 50px; /* 左に100pxの余白 */
+  margin-right: 50px; /* 右に100pxの余白 */
+}
+
 .error-message {
   color: red;
   font-size: 0.9em;
