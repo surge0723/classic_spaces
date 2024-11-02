@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container my-4">
   <!-- パンくずリスト -->
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Home</a></li>
       <li class="breadcrumb-item"><a href="/groups">グループ一覧</a></li>
-      <li class="breadcrumb-item">投稿編集</li>
+      <li class="breadcrumb-item active" aria-current="page">投稿編集</li>
     </ol>
   </nav>
   
@@ -14,21 +14,20 @@
 
     <!-- メインコンテンツ -->
     <div class="col-lg-9">
-    <%= form_with model: @group, local: true do |f| %>
-    <div class="form-group">
-        <label for="inputName">グループ名</label>
-        <%= f.text_field :name, autofocus: true, id:"inputName", class: 'form-control' %>
-    </div>
-    
-    <div class="form-group">
-        <label for="inputIntroduction">会場名</label>
-        <%= f.text_area :introduction, autofocus: true, id: "inputIntroduction", class: 'form-control' %>
-    </div>
-    
-    <div class="form-group">
-    <%= f.submit class: 'btn btn-info' %>
-    </div>
-    
-    <% end %>
+      <h2 class="mb-4">グループ編集</h2>
+        <%= form_with model: @group, local: true do |f| %>
+        <div class="form-group">
+            <label for="inputName">グループ名</label>
+            <%= f.text_field :name, autofocus: true, id:"inputName", class: 'form-control' %>
+        </div>
+        <div class="form-group">
+            <label for="inputIntroduction">会場名</label>
+            <%= f.text_area :introduction, autofocus: true, id: "inputIntroduction", class: 'form-control' %>
+        </div>
+        <div class="form-group">
+        <%= f.submit class: 'btn btn-info' %>
+        </div>
+        <% end %>
+        <%= link_to "グループの削除", group_path(@group), class: "btn btn-outline-danger", method: :delete, data: { confirm: "本当にグループを削除しますか？" } %>
   </div>
 </div> 

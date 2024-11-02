@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container my-4">
   <!-- パンくずリスト -->
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item">グループ一覧</a></li>
+      <li class="breadcrumb-item active" aria-current="page">グループ一覧</a></li>
     </ol>
   </nav>
   
@@ -13,22 +13,32 @@
 
     <!-- メインコンテンツ -->
     <div class="col-lg-9">
-      <h2>Groups</h2>
-      <table class='table'>
-        <thead>
+      <h2 class="mb-4">グループ一覧</h2>
+      <table class="table table-hover table-striped custom-font-color">
+        <thead class="text-white" style="background-color: #9b683e;">
           <tr>
-            <th>name</th>
-            <th colspan="3"></th>
+            <th class="p-3">グループ名</th>
+            <th class="p-3 text-center">メンバー数</th>
+            <th class="p-3 text-center">詳細</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% @groups.each do |group| %>
-            <tr>
-              <td><%= group.name %></td>
-              <td><%= link_to 'Show', group, class: "group_#{group.id}" %></td>
-              <% if group.is_owned_by?(current_user) %>
-                <td><%= link_to 'グループの編集', edit_group_path(group), class: "group_#{group.id}" %></td>
-              <% end %>
+            <tr class="<%= cycle('bg-light', 'bg-white') %>">
+              <td class="p-3"><%= group.name %></td>
+              <td class="p-3 text-center"><%= group.users.count %></td>
+              <td class="p-3 text-center">
+                <%= link_to group, class: "group_#{group.id} text-primary" do %>
+                  <i class="fa-solid fa-link"></i>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <% if group.is_owned_by?(current_user) %>
+                  <%= link_to '編集', edit_group_path(group), class: "btn btn-outline-primary btn-sm" %>
+                <% else %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

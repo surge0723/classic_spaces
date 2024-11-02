@@ -4,9 +4,9 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @space = Space.new
-    @spaces = @user.spaces
-    @spaces_list = @user.spaces
-    @favorites = @user.favorites.includes(:space)
+    @spaces = @user.spaces.page(params[:page])
+    @spaces_list = @user.spaces.page(params[:page])
+    @favorites = @user.favorites.includes(:space).page(params[:page])
   end
   
   def edit

@@ -1,0 +1,18 @@
+// モーダルにエラーメッセージを挿入
+const errorMessages = <%= j @error_messages.to_json %>;
+let modalBody = $('#commentModal .modal-body');
+
+// 既存のエラーメッセージをクリア
+modalBody.find('.alert').remove();
+
+// エラーメッセージがある場合は、アラートを表示
+if (errorMessages.length > 0) {
+  let alertDiv = $('<div class="alert alert-danger"><h4 class="alert-heading">エラーが発生しました</h4><ul></ul></div>');
+  errorMessages.forEach(function(message) {
+    alertDiv.find('ul').append('<li>' + message + '</li>');
+  });
+  modalBody.prepend(alertDiv);
+}
+
+// モーダルを表示
+$('#commentModal').modal('show');

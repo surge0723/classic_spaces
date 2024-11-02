@@ -1,6 +1,7 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :ensure_normal_user, only: :new
   
   def index
     @space = Space.new
@@ -35,10 +36,19 @@ class Public::GroupsController < ApplicationController
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
     if @group.save
+      flash[:notice] = "投稿を保存しました"
       redirect_to groups_path
     else
+      flash[:alert] = "投稿できませんでした。必須項目を入力してください。" 
       render 'new'
     end
+  end
+  
+  def destroy
+    @group = Group.find(params[:id]) 
+    @group.destroy
+    flash[:notice] = 'グループを削除しました。'
+    redirect_to groups_path
   end
 
   private
@@ -50,6 +60,13 @@ class Public::GroupsController < ApplicationController
   def ensure_correct_user
     @group = Group.find(params[:id])
     unless @group.owner_id == current_user.id
+      redirect_to groups_path
+    end
+  end
+
+  def ensure_normal_user
+    if current_user.email == 'guest@example.com'
+      flash[:alert] = "ゲストユーザーは、グループ作成ができません。"
       redirect_to groups_path
     end
   end

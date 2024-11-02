@@ -1,39 +1,56 @@
-<div class="container">
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item">投稿一覧</a></li>
-  </ol>
-</nav>
- <div class="row">
-<%= render "public/spaces/left" %>
+<div class="container my-4">
+  <!-- パンくずリスト -->
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">投稿一覧</li>
+    </ol>
+  </nav>
 
+  <div class="row">
+    <!-- 左サイドバー -->
+      <%= render "public/spaces/left" %>
+      
+    <!-- メインコンテンツ -->
+    <div class="col-lg-9">
+      <h2 class="mb-4">投稿一覧</h2>
 
-<div class="col-lg-9"> 
-  <table class="table table-hover custom-font-color">
-    <h2>投稿一覧</h2>
-    <thead>
-      <tr>
-        <th>会場名</th>
-        <th>場所</th>
-        <th>詳細</th>
-        <th>保存</th>
-        <th>コメント数</th>
-      </tr>
-    </thead>
-    <% @spaces.each do |space| %>
-    <tbody>
-      <tr>
-          <td><%= space.space %></td>
-          <td><%= space.place %></td>
-          <td><%= link_to '詳細',space_path(space.id) %></td>
-          <td><%= render "public/favorites/btn", space: space %></td>
-          <td><%= space.comments.count %></td>
-      </tr>
-      <% end %>
+      <!-- 投稿一覧テーブル -->
+      <table class="table table-hover table-striped custom-font-color">
+      <thead class="text-white" style="background-color: #9b683e;">
+          <tr>
+            <th>会場名</th>
+            <th>場所</th>
+            <th class="text-center">詳細</th>
+            <th class="text-center">保存</th>
+            <th class="text-center">コメント数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @spaces.each do |space| %>
+            <tr>
+              <td><%= space.space %></td>
+              <td><%= space.place %></td>
+              <td class="text-center">
+                <%= link_to space_path(space.id) do %>
+                  <i class="fa-solid fa-link"></i>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <%= render "public/favorites/btn", space: space %>
+              </td>
+              <td class="text-center">
+                <%= space.comments.count %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <!-- ページネーション -->
+      <div class="d-flex justify-content-center">
+        <%= paginate @spaces %>
       </div>
-      </div>
-    </tbody>
-  </table>
-  <%= paginate @spaces %>
+    </div>
+  </div>
 </div>

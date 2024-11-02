@@ -1,15 +1,29 @@
-<div class="container">
+<div class="container my-4">
+    <!-- パンくずリスト -->
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/groups">グループ一覧</a></li>
+      <li class="breadcrumb-item"><%= link_to 'グループ詳細',group_path(@group) %></li>
+      <li class="breadcrumb-item"><%= link_to 'イベント通知',new_group_event_notice_path(@group) %></li>
+      <li class="breadcrumb-item active" aria-current="page">イベント通知</li>
+    </ol>
+  </nav>
   <div class="row justify-content-center">
     <div class="col-6">
-      <h1>送信が完了しました</h1>
+      <h1>送信が完了しました！</h1>
       
       <p>内容は以下の通りです。</p>
       
       <h2>[タイトル]</h2>
       <p><%= @title %></p>
       
-      
       <h2>[本文]</h2>
       <p><%= @body %></p>
+      
+      <%= link_to groups_path, class: 'btn btn-primary btn-block mb-4 shadow-sm' do %>
+        グループ一覧へ戻る
+      <% end %>
+    </div>
   </div>
 </div>

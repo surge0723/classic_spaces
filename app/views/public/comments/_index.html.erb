@@ -1,33 +1,41 @@
-<h2>コメント一覧</h2>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>ユーザー</th>
-      <th>投稿区分</th>
-      <th>コメント</th>
-      <th>投稿日時</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% space.comments.each do |comment| %>
-      <tr>
-        <td>
-          <% if comment.user.present? %>
-            <%= link_to comment.user.name, user_path(comment.user) %>
-          <% else %>
-            <span>ユーザーが存在しません</span>
-          <% end %>
-        </td>
-        <td><%= comment.category %></td>
-        <td><%= comment.comment %></td>
-        <td><%= l(comment.created_at, format: :short) %></td>
-        <td>
-          <% if comment.user == current_user %>
-            <%= link_to "削除", space_comment_path(space, comment), method: :delete, data: { confirm: "本当にこのコメントを削除しますか？" }, class: "btn btn-danger btn-sm" %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container my-4">
+  <h2 class="mb-4">コメント一覧</h2>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped custom-font-color">
+      <thead class="text-white" style="background-color: #9b683e;">
+        <tr>
+          <th class="text-center">投稿区分</th>
+          <th class="text-center">コメント</th>
+          <th class="text-center">ユーザー</th>
+          <th class="text-center">投稿日時</th>
+          <th class="text-center"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% space.comments.each do |comment| %>
+          <tr>
+             <td class="text-center">
+               <%= comment.category %>
+             </td>
+            <td><%= comment.comment %></td>
+             <td class="text-center">
+              <% if comment.user.present? %>
+                <%= link_to comment.user.name, user_path(comment.user) %>
+              <% else %>
+                <span class="text-muted">ユーザーが存在しません</span>
+              <% end %>
+            </td>
+             <td class="text-center">
+               <%= comment.created_at.strftime("%Y/%m/%d") %>
+             </td>
+            <td class="text-center">
+              <% if comment.user == current_user %>
+                <%= link_to "削除", space_comment_path(space, comment), method: :delete, data: { confirm: "本当にこのコメントを削除しますか？" }, class: "btn btn-danger btn-sm" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,22 +1,41 @@
-<!--<main>-->
-<!--    <h2>Users_inde</h2>-->
-<!--        <table class="table table-hover table-inverse">-->
-<!--          <thead>-->
-<!--            <tr>-->
-<!--              <th>name</th>-->
-<!--              <th></th>-->
-<!--            </tr>-->
-<!--            % @users.each do |user| %>-->
-<!--            <tbody>-->
-<!--            <tr>-->
-<!--              <td>%= user.name %></td>-->
-<!--              <td>%=link_to "Show",user_path(user) %></td>-->
-<!--              % end %>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--            </thead>-->
-<!--          </table>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  </div>-->
-<!--</main>-->
+<div class="container my-4">
+  <!-- パンくずリスト -->
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">ユーザー一覧</li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <!-- 左サイドバー -->
+    <%= render "public/spaces/left" %>
+
+    <!-- メインコンテンツ -->
+    <div class="col-lg-9">
+      <h2 class="mb-4">ユーザー一覧</h2>
+      <table class="table table-hover table-inverse table-striped custom-font-color">
+        <thead class="text-white" style="background-color: #9b683e;">
+          <tr>
+            <th>ユーザー名</th>
+            <th>詳細</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td class="text-center">
+                  <%= user.name %>
+              </td>
+              <td class="text-center">
+               <%= link_to user_path(user) do %>
+                 <i class="fa-solid fa-link"></i>
+               <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

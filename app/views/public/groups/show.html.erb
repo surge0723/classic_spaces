@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container my-4">
   <!-- パンくずリスト -->
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Home</a></li>
       <li class="breadcrumb-item"><a href="/groups">グループ一覧</a></li>
-      <li class="breadcrumb-item">グループ詳細</li>
+      <li class="breadcrumb-item active" aria-current="page">グループ詳細</li>
     </ol>
   </nav>
 
@@ -15,40 +15,44 @@
     <!-- メインコンテンツ -->
     <div class="col-lg-9">
       <%= render 'layouts/errors', obj: @space %>
-      <h2>Group Detail</h2>
-      <table class='table table-hover table-inverse'>
-         <thead>
-          <tr>
-            <th>Name</th>
-            <th>Introduction</th>
-            <th>Members</th>
-            <th colspan="3"></th>
+      
+      <h2>「<%= @group.name %>」の詳細</h2>
+      
+      <table class="table table-hover table-striped custom-font-color">
+        <thead>
+          <tr class="text-white" style="background-color: #9b683e;">
+            <th>名前</th>
+            <th>紹介</th>
+            <th>メンバー</th>
+            <th colspan="2"></th>
           </tr>
         </thead>
-
-        <tr>
-          <td><%= @group.name %></td>
-          <td><%= @group.introduction %></td>
-          <td>
-             <% @group.users.each do |user| %>
-             <li style="list-style: none;"><%= user.name %></li>
-            <% end %>
-          </td>
-          
-          <td>
-            <% if @group.is_owned_by?(current_user) %>
-            <%= link_to 'Edit', edit_group_path(@group), class: "btn btn-sm btn-success" %>
-          <td>
-            <%= link_to 'Notice an Event', new_group_event_notice_path(@group), class: "btn btn-sm btn-info" %>
-          </td>
-            <% elsif @group.includesUser?(current_user)%>
-              <%= link_to 'Leave this group', group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
-            <% else %>
-              <%= link_to 'Join this group', group_group_users_path(@group), method: :post, class: "btn btn-sm btn-success" %>
-            <% end %>
-          </td>
-        </tr>
-       </table>    
+        <tbody>
+          <tr>
+            <td><%= @group.name %></td>
+            <td><%= @group.introduction %></td>
+            <td class="text-center">
+              <ul class="list-unstyled">
+                <% @group.users.each do |user| %>
+                  <li><i class="fa fa-user"></i> <%= user.name %></li>
+                <% end %>
+              </ul>
+            </td>
+            <td class="text-center">
+              <% if @group.is_owned_by?(current_user) %>
+                <%= link_to 'グループを編集', edit_group_path(@group), class: "btn btn-sm btn-success", data: { toggle: "tooltip" }, title: "グループを編集" %>
+              </td>
+              <td>
+                <%= link_to 'イベント通知', new_group_event_notice_path(@group), class: "btn btn-sm btn-info", data: { toggle: "tooltip" }, title: "イベント通知を送信" %>
+              <% elsif @group.includesUser?(current_user) %>
+                <%= link_to 'グループ退会', group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger", data: { toggle: "tooltip" }, title: "グループを退会" %>
+              <% else %>
+                <%= link_to 'グループ加入', group_group_users_path(@group), method: :post, class: "btn btn-sm btn-success", data: { toggle: "tooltip" }, title: "グループに参加" %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>    
     </div>
   </div>
 </div>

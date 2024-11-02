@@ -1,108 +1,135 @@
-<div class="container">
+<div class="container my-4">
   <!-- パンくずリスト -->
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item">Myページ</li>
+      <li class="breadcrumb-item active" aria-current="page">Myページ</li>
     </ol>
   </nav>
 
   <div class="row">
+    <!-- 左側のサイドバー -->
     <%= render "public/spaces/left" %>
+
+    <!-- メインコンテンツ -->
     <div class="col-lg-9">
       <!-- ユーザー情報テーブル -->
-      <table class="table table-hover custom-font-color">
-        <h2>ユーザー情報</h2>
-        <thead>
-          <tr>
-            <th>ユーザー名</th>
-            <th>メールアドレス</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= @user.name %></td>
-            <td><%= @user.email %></td>
-            <% if user_signed_in? && @user == current_user %>
-              <td>
-                <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
-                  ユーザー情報の編集
-                <% end %>
-              </td>
-              <td>
-                <%= link_to "退会", user_path(current_user.id), class: "btn btn-outline-secondary btn-block", method: :delete, "data-confirm" => "本当に退会しますか？" %>
-              </td>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
-
-   <div class="container mt-4">
-     <div class="tabs">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" id="spaces-list-tab" data-toggle="tab" href="#spaces-list" role="tab" aria-controls="spaces-list" >投稿一覧</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="saved-spaces-tab" data-toggle="tab" href="#saved-spaces" role="tab" aria-controls="saved-spaces" >保存した投稿</a>
-      </li>
-    </ul>
-
-  <div class="tab-content" id="spaceTabsContent">
-    <div class="tab-pane fade show active" id="spaces-list" role="tabpanel" aria-labelledby="spaces-list-tab">
-      <h2>投稿一覧</h2>
-      <table class="table table-hover custom-font-color">
-        <thead>
-          <tr>
-            <th>会場名</th>
-            <th>場所</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% if @spaces_list.present? %>
-            <% @spaces_list.each do |space| %>
+      <div class="card mb-4">
+      <h2 class="card-title mt-4 ml-4">ユーザー情報</h2>
+        <div class="card-body">
+          <table class="table table-hover custom-font-color">
+            <tbody>
               <tr>
-                <td><%= space.space %></td>
-                <td><%= space.place %></td>
-                <td><%= link_to '詳細', space_path(space.id) %></td>
+                <th>ユーザー名</th>
+                <td><%= @user.name %></td>
               </tr>
-            <% end %>
-          <% else %>
-            <tr>
-              <td colspan="3">投稿した練習場はありません。</td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="tab-pane fade" id="saved-spaces" role="tabpanel" aria-labelledby="saved-spaces-tab">
-      <h2>保存した投稿</h2>
-      <% if @favorites.present? %>
-        <table class="table table-hover custom-font-color">
-          <thead>
-            <tr>
-              <th>会場名</th>
-              <th>場所</th>
-              <th>詳細</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @favorites.each do |favorite| %>
               <tr>
-                <td><%= favorite.space.space %></td>
-                <td><%= favorite.space.place %></td>
-                <td><%= link_to '詳細', space_path(favorite.space) %></td>
+                <th>メールアドレス</th>
+                <td><%= @user.email %></td>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% else %>
-        <p>まだ保存した投稿はありません。</p>
-      <% end %>
+              <% if user_signed_in? && @user == current_user %>
+                <tr>
+                  <td>
+                    <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary" do %>ユーザー情報の編集<% end %>
+                  </td>
+                  <td>
+                    <%= link_to "退会", user_path(current_user.id), class: "btn btn-outline-secondary", method: :delete, data: { confirm: "本当に退会しますか？" } %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- タブとコンテンツ -->
+      <div class="card">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs" id="spaceTabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="spaces-list-tab" data-toggle="tab" href="#spaces-list" role="tab" aria-controls="spaces-list">投稿一覧</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="saved-spaces-tab" data-toggle="tab" href="#saved-spaces" role="tab" aria-controls="saved-spaces">保存した投稿</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content" id="spaceTabsContent">
+            <!-- 投稿一覧タブ -->
+            <div class="tab-pane fade show active" id="spaces-list" role="tabpanel" aria-labelledby="spaces-list-tab">
+              <h2>投稿一覧</h2>
+              <table class="table table-hover table-striped custom-font-color">
+                <thead class="text-white" style="background-color: #9b683e;">
+                  <tr>
+                    <th>会場名</th>
+                    <th>場所</th>
+                    <th>詳細</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if @spaces_list.present? %>
+                    <% @spaces_list.each do |space| %>
+                      <tr>
+                        <td><%= space.space %></td>
+                        <td><%= space.place %></td>
+                        <td class="text-center">
+                          <%= link_to space_path(space.id) do %>
+                          <i class="fa-solid fa-link"></i>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% else %>
+                    <tr>
+                      <td colspan="3">投稿した練習場はありません。</td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              <!-- 投稿一覧のページネーション -->
+              <div class="d-flex justify-content-center">
+                <%= paginate @spaces_list %>
+              </div>
+            </div>
+
+            <!-- 保存した投稿タブ -->
+            <div class="tab-pane fade" id="saved-spaces" role="tabpanel" aria-labelledby="saved-spaces-tab">
+              <h2>保存した投稿</h2>
+              <% if @favorites.present? %>
+                <table class="table table-hover table-striped custom-font-color">
+                  <thead class="text-white" style="background-color: #9b683e;">
+                    <tr>
+                      <th>会場名</th>
+                      <th>場所</th>
+                      <th>詳細</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @favorites.each do |favorite| %>
+                      <tr>
+                        <td><%= favorite.space.space %></td>
+                        <td><%= favorite.space.place %></td>
+                        <td class="text-center">
+                          <%= link_to space_path(favorite.space) do %>
+                          <i class="fa-solid fa-link"></i>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                <!-- 保存した投稿のページネーション -->
+                <div class="d-flex justify-content-center">
+                  <%= paginate @favorites %>
+                </div>
+              <% else %>
+                <p>まだ保存した投稿はありません。</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

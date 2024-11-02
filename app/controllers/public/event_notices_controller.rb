@@ -9,6 +9,12 @@ class Public::EventNoticesController < ApplicationController
     @title = params[:title]
     @body = params[:body] 
     
+    if @title.blank? || @body.blank?
+      flash[:alert] = "タイトルと本文は必須です"
+      render :new
+      return
+    end
+    
     event = { 
       :group => @group, 
       :title => @title, 

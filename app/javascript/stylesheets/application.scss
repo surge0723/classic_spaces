@@ -21,6 +21,10 @@
   margin-right: 100px; /* 右に100pxの余白 */
 }
 
+table thead th {
+    text-align: center;
+}
+
 .alert-custom {
   margin-left: 50px; /* 左に50pxの余白 */
   margin-right: 50px; /* 右に50pxの余白 */
@@ -55,7 +59,6 @@ body {
 .btn-rounded:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* ホバー時に影を強くする */
 }
-
 
 .nav-tabs .nav-link {
   color: #555;
