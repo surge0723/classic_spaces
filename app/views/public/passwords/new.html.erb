@@ -2,30 +2,36 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
     <li class="breadcrumb-item"><a href="/users/sign_in">ログイン</a></li>
-    <li class="breadcrumb-item"><a href="/users/password/new">パスワードリセット</a></li>
+    <li class="breadcrumb-item active" aria-current="page">パスワードリセット</li>
   </ol>
 </nav>
 
-
-<div class="container">
+<div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-      <h2>パスワードを忘れた場合</h2>
+    <div class="col-md-6">
+      <h2 class="text-center mb-4">パスワードを忘れた場合</h2>
       
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
-      
-        <div class="field">
-          <%= f.label :メールアドレス %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <% if resource.errors.any? %>
+          <div class="alert alert-danger">
+            <h4>エラーが発生しました:</h4>
+            <ul>
+              <% resource.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="mb-3">
+          <%= f.label :email, "メールアドレス", class: "form-label" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
         </div>
       
-        <div class="actions">
-          <%= f.submit "登録メールアドレスに再設定案内を送る" %>
+        <div class="d-grid">
+          <%= f.submit "登録メールアドレスに再設定案内を送る", class: "btn btn-primary" %>
         </div>
       <% end %>
-      
-      <%= render "devise/shared/links" %>
     </div>  
   </div>  
 </div>

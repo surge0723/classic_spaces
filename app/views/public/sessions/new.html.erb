@@ -1,50 +1,51 @@
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
+  <ol class="breadcrumb alert-custom">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item">ログイン</a></li> <!-- 余分なスペースを削除 -->
+    <li class="breadcrumb-item active" aria-current="page">ログイン</li>
   </ol>
 </nav>
 
-
-<div class="container">
+<div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-      <h2>ログインページ</h2>
+    <div class="col-md-6">
+      <h2 class="text-center mb-4">ログインページ</h2>
 
-<% if resource.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(resource.errors.count, "件のエラーが発生しました") %>。次の項目を確認してください:</h2>
-    <ul>
-      <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% if resource.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <h4><%= pluralize(resource.errors.count, "件のエラーが発生しました") %>。次の項目を確認してください:</h4>
+          <ul>
+            <% resource.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-    </ul>
-  </div>
-<% end %>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="mb-3">
+          <%= f.label :email, "メールアドレス", class: "form-label" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        </div>
       
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="field">
-            <%= f.label :メールアドレス %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="mb-3">
+          <%= f.label :password, "パスワード", class: "form-label" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+        </div>
+      
+        <% if devise_mapping.rememberable? %>
+          <div class="form-check mb-3">
+            <%= f.check_box :remember_me, class: "form-check-input" %>
+            <%= f.label :remember_me, "次回より自動でログインする", class: "form-check-label" %>
           </div>
-        
-          <div class="field">
-            <%= f.label :パスワード %><br />
-            <%= f.password_field :password, autocomplete: "current-password" %>
-          </div>
-        
-          <% if devise_mapping.rememberable? %>
-            <div class="field">
-              <%= f.check_box :remember_me %>
-              <%= f.label :次回より自動でログインする %>
-            </div>
-          <% end %>
-        
-          <div class="actions">
-            <%= f.submit "ログイン" %>
-          </div>
-            <%= render "devise/shared/links" %>
-          <% end %>
+        <% end %>
+      
+        <div class="d-grid">
+          <%= f.submit "ログイン", class: "btn btn-primary" %>
+        </div>
+        <div class="text-center mt-3">
+          <%= render "devise/shared/links" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

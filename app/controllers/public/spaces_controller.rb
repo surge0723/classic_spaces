@@ -13,13 +13,13 @@ class Public::SpacesController < ApplicationController
     flash[:notice] = "投稿を保存しました"
      redirect_to @space, notice: '投稿を保存しました'
   else
-    flash[:alert] = "投稿に失敗しました。必須項目を入力してください。" 
+    flash[:alert] = "投稿できませんでした。必須項目を入力してください。" 
     render :new
   end
 end
 
   def index
-    @spaces = Space.all
+    @spaces = Space.page(params[:page])
     @space = Space.new
     @user = current_user
   end
@@ -42,7 +42,7 @@ end
       if @space.nil?
         redirect_to spaces_path, alert: '投稿が見つかりません。' # エラーメッセージと共にリダイレクト
       elsif @space.user_id != current_user.id
-          redirect_to spaces_path, alert: '他のユーザーの編集はできません。'
+          redirect_to spaces_path, alert: '他ユーザーの編集はできません。'
       else
         space=Space.find(params[:id])
       end
