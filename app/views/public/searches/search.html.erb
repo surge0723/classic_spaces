@@ -31,6 +31,14 @@
         <% else %>
           <p>検索対象はありませんでした。</p>
         <% end %>
+
+      <!-- グループの検索結果 -->
+      <% elsif @model == 'groups' %>
+        <% if @records.any? %>
+         <%= render 'public/groups/index', groups: @records %>
+        <% else %>
+          <p>検索対象はありませんでした。</p>
+        <% end %>
       <% end %>
     </div>
   </div>

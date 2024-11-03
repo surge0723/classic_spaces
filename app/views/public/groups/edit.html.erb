@@ -21,9 +21,14 @@
             <%= f.text_field :name, autofocus: true, id:"inputName", class: 'form-control' %>
         </div>
         <div class="form-group">
-            <label for="inputIntroduction">会場名</label>
+            <label for="inputIntroduction">紹介文</label>
             <%= f.text_area :introduction, autofocus: true, id: "inputIntroduction", class: 'form-control' %>
         </div>
+        <div class="form-group">
+            <label for="inputCondition">参加条件</label>
+            <%= f.text_area :condition, autofocus: true, id: "inputConditon", class: 'form-control' %>
+        </div>
+
         <div class="form-group">
         <%= f.submit class: 'btn btn-info' %>
         </div>

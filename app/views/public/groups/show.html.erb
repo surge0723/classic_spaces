@@ -23,6 +23,8 @@
           <tr class="text-white" style="background-color: #9b683e;">
             <th>名前</th>
             <th>紹介</th>
+            <th>参加条件</th>
+            <th>オーナー</th>
             <th>メンバー</th>
             <th colspan="2"></th>
           </tr>
@@ -31,6 +33,8 @@
           <tr>
             <td><%= @group.name %></td>
             <td><%= @group.introduction %></td>
+            <td><%= @group.condition %></td>
+            <td><%= @group.owner.name %></td>
             <td class="text-center">
               <ul class="list-unstyled">
                 <% @group.users.each do |user| %>

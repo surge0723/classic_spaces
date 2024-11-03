@@ -51,10 +51,14 @@ class Public::GroupsController < ApplicationController
     redirect_to groups_path
   end
 
+  def search
+    @groups = Group.where("name LIKE ?", "%#{params[:query].to_s.gsub(/[%_]/, '')}%")
+  end
+
   private
 
   def group_params
-    params.require(:group).permit(:name,:introduction) # ここで許可する属性を指定
+    params.require(:group).permit(:name,:introduction,:condition) 
   end
   
   def ensure_correct_user

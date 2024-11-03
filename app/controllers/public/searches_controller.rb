@@ -10,6 +10,8 @@ class Public::SearchesController < ApplicationController
 		@records = User.search_for(@content, @method)
     elsif @model == 'spaces'
       @records = Space.search_for(@content, @method)
+    else @model == 'groups'
+      @records = Group.search_for(@content, @method)
     end
   end
 end
