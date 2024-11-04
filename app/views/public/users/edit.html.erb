@@ -1,29 +1,39 @@
-<div class="container">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item"><%= link_to 'Myページ',user_path(current_user) %></a></li>
-    <li class="breadcrumb-item active" aria-current="page">ユーザー情報編集</a></li>
-  </ol>
-</nav>
- <div class="row">
-<%= render "public/spaces/left" %>
-<div class="col-lg-9"> 
-  <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-      <%= form_for @user do |f| %> 
-       <div class="form-group">
-         <label for="inputName">ユーザー名</label>
-         <div><%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"name"%></div>
-       </div>
-        <div class="form-group">
-         <label for="inputEmail">登録メールアドレス</label>
-         <div><%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder:"email"%></div>
-         </div>   
-         
-         <%= f.submit "ユーザー情報を変更する",class: "btn btn-secondary"  %>
-         <% end %>
+<div class="container my-4">
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><%= link_to 'Myページ', user_path(current_user) %></li>
+      <li class="breadcrumb-item active" aria-current="page">ユーザー情報編集</li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <%= render "public/spaces/left" %>
+
+    <div class="col-lg-9">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <h2 class="mb-4 text-center">ユーザー情報編集</h2>
+
+          <%= form_with model: @user, local: true do |f| %>
+            <div class="mb-3 <%= 'field_with_errors' if @user.errors[:name].any? %>">
+              <%= f.label :name, "ユーザー名", class: "form-label" %>
+              <%= f.text_field :name, autofocus: true, placeholder: "ユーザー名", class: "form-control" %>
+            </div>
+
+            <!-- Email field with error handling -->
+            <div class="mb-3 <%= 'field_with_errors' if @user.errors[:email].any? %>">
+              <%= f.label :email, "登録メールアドレス", class: "form-label" %>
+              <%= f.text_field :email, placeholder: "メールアドレス", class: "form-control" %>
+            </div>
+
+            <!-- Submit button -->
+            <div class="d-grid mt-4">
+              <%= f.submit "ユーザー情報を変更する", class: "btn btn-secondary btn-lg" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 </div>
