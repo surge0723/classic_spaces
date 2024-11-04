@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'groups/index'
+    get 'groups/destroy'
+    resources :groups, only: [:index, :destroy]
+  end
 devise_for :admins, skip: [:passwords], controllers: {
   sessions: 'admin/sessions',
   registrations: 'admin/registrations'
@@ -19,7 +24,11 @@ devise_for :admins, skip: [:passwords], controllers: {
     resources:spaces      
     resources:users
     resources :groups do
-      resource :group_users, only: [:create, :destroy]
+      resource :group_users, only: [:create, :update, :destroy] do
+        member do
+          patch :update_status # この行を追加
+        end
+      end
       resources :event_notices, only: [:new, :create]
       get "event_notices" => "event_notices#sent"
     end

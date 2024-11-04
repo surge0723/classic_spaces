@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>グループ一覧</h1>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>グループ名</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= group.name %></td>
+          <td>
+            <%= link_to '削除', admin_group_path(group), method: :delete, data: { confirm: '本当にこのグループを削除しますか？' }, class: 'btn btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

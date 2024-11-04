@@ -27,7 +27,7 @@
           <% @groups.each do |group| %>
             <tr class="<%= cycle('bg-light', 'bg-white') %>">
               <td class="p-3"><%= group.name %></td>
-              <td class="p-3 text-center"><%= group.users.count %></td>
+              <td class="p-3 text-center"><%= group.group_users.where(status: :approved).count %></td>
               <td class="p-3 text-center">
                 <%= link_to group, class: "group_#{group.id} text-primary" do %>
                   <i class="fa-solid fa-link"></i>

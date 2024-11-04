@@ -26,7 +26,8 @@
             <th>参加条件</th>
             <th>オーナー</th>
             <th>メンバー</th>
-            <th colspan="2"></th>
+            <th>グループ加入状況</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -37,7 +38,7 @@
             <td><%= @group.owner.name %></td>
             <td class="text-center">
               <ul class="list-unstyled">
-                <% @group.users.each do |user| %>
+                <% @group.users.where(group_users: { status: :approved }).each do |user| %>
                   <li><i class="fa fa-user"></i> <%= user.name %></li>
                 <% end %>
               </ul>
@@ -45,18 +46,48 @@
             <td class="text-center">
               <% if @group.is_owned_by?(current_user) %>
                 <%= link_to 'グループを編集', edit_group_path(@group), class: "btn btn-sm btn-success", data: { toggle: "tooltip" }, title: "グループを編集" %>
-              </td>
-              <td>
-                <%= link_to 'イベント通知', new_group_event_notice_path(@group), class: "btn btn-sm btn-info", data: { toggle: "tooltip" }, title: "イベント通知を送信" %>
               <% elsif @group.includesUser?(current_user) %>
-                <%= link_to 'グループ退会', group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger", data: { toggle: "tooltip" }, title: "グループを退会" %>
+                <% if @group.group_users.find_by(user: current_user).pending? %>
+                  <p>オーナーの審査待ち</p>
+                <% elsif @group.group_users.find_by(user: current_user).rejected? %>
+                  <p>申請は拒否されました。</p>
+                  <%= button_to '再申請', group_group_users_path(@group), method: :post, class: "btn btn-sm btn-primary" %>
+                <% elsif @group.group_users.find_by(user: current_user).leave? %>
+                  <%= button_to '再度参加申請', group_group_users_path(@group), method: :post, class: "btn btn-sm btn-primary" %>
+                <% else %>
+                  <%= link_to 'グループ退会', group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger", data: { toggle: "tooltip" }, title: "グループを退会" %>
+                <% end %>
               <% else %>
-                <%= link_to 'グループ加入', group_group_users_path(@group), method: :post, class: "btn btn-sm btn-success", data: { toggle: "tooltip" }, title: "グループに参加" %>
+                <%= button_to '参加申請', group_group_users_path(@group), method: :post %>
               <% end %>
+            </td>
+            <td>
+              <%= link_to 'イベント通知', new_group_event_notice_path(@group), class: "btn btn-sm btn-info", data: { toggle: "tooltip" }, title: "イベント通知を送信" %>
             </td>
           </tr>
         </tbody>
-      </table>    
+      </table>
+      
+      <% if @group.owner == current_user %>
+        <h2>参加申請一覧</h2>
+      
+        <% @group.group_users.where(status: :pending).each do |group_user| %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <p class="card-title"><strong>申請者:</strong> <%= group_user.user.name %></p>
+              
+              <div class="btn-group" role="group" aria-label="approval-buttons">
+                <% if group_user.pending? %>
+                  <%= button_to '承認', update_status_group_group_users_path(@group, group_user_id: group_user.id, status: :approved), 
+                                method: :patch, class: "btn btn-success" %>
+                  <%= button_to '拒否', update_status_group_group_users_path(@group, group_user_id: group_user.id, status: :rejected), 
+                                method: :patch, class: "btn btn-danger" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+  <% end %>
+<% end %>
     </div>
   </div>
 </div>
