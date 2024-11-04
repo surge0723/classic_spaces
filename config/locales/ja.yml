@@ -6,11 +6,19 @@ ja:
           attributes:
             email:
               blank: "メールアドレスを入力してください"
+              taken: "メールアドレスは既に存在します"
             password:
               blank: "パスワードを入力してください"
             name:
               blank: "ユーザー名を入力してください"
-              
+              taken: "ユーザー名は既に存在します"
+        group:  # インデントを修正
+          attributes:
+            name:
+              blank: "グループ名を入力してください"
+              taken: "は既に存在します"
+            introduction:
+              blank: "を入力してください"
   errors:
     format: "%{message}" # エラーメッセージの前後に余計なフィールド名が表示されないように設定
     messages:

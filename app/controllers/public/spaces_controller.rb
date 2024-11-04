@@ -26,7 +26,7 @@ end
 
   def show
     @space = Space.find_by(id: params[:id])
-      if @space.nil?
+    if @space.nil?
       flash[:alert] = "指定された投稿は存在しません"
       redirect_to spaces_path
     else
@@ -62,7 +62,7 @@ end
   def destroy
     space=Space.find(params[:id])
     space.destroy
-    redirect_to  user_path(current_user)
+    redirect_to  user_path(current_user), notice: '投稿を削除しました。'
   end
   
   private

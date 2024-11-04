@@ -5,10 +5,10 @@ Rails.application.routes.draw do
     get 'groups/destroy'
     resources :groups, only: [:index, :destroy]
   end
-devise_for :admins, skip: [:passwords], controllers: {
-  sessions: 'admin/sessions',
-  registrations: 'admin/registrations'
-}
+  devise_for :admins, skip: [:passwords],  path: 'admin', path_names: { sign_up: 'secret/sign_up' }, controllers: {
+    sessions: 'admin/sessions',
+    registrations: 'admin/registrations'
+  }
   
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'

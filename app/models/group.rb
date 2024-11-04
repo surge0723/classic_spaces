@@ -2,7 +2,7 @@ class Group < ApplicationRecord
       belongs_to :owner, class_name: 'User'
       has_many :group_users, dependent: :destroy
       has_many :users, through: :group_users, source: :user      
-  validates :name, presence: true
+  validates :name, presence: { message: 'グループ名を入力してください' }, uniqueness: { message: 'は既に存在します' }
   validates :introduction, presence: true
   validates :condition, presence: true
 
@@ -19,7 +19,7 @@ class Group < ApplicationRecord
   end
 
   def is_owned_by?(user)
-    owner.id == user.id
+    user.present? && owner.present? && owner.id == user.id
   end
   
   def includesUser?(user)
