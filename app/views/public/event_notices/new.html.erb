@@ -15,7 +15,7 @@
       
       <%= form_with url: group_event_notices_path(@group), method: :post, local:true do |f| %>
         <div class="form-group">
-          <%= f.label :タイトル %>
+          <%= f.label :件名 %>
           <%= f.text_field :title, class: 'form-control' %>
         </div>
         <div class="form-group">
