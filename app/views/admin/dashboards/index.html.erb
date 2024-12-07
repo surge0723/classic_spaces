@@ -1,24 +1,32 @@
-<div class="container">
-  <h2>全ユーザー一覧</h2>
-  <table class="table table-hover table-inverse">
-    <thead>
-      <tr>
-        <th>ユーザー名</th>
-        <th>メールアドレス</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <% @users.each do |user| %>
-    <tbody>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to '詳細', admin_dashboard_show_path(user.id) %></td>
-        <td><%= link_to '退会',admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } %> </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= link_to 'グループ一覧はこちら', admin_groups_path, class: 'btn btn-primary' %>
+<div class="container mt-5">
+  <h2 class="mb-4 text-left">全ユーザー一覧</h2>
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered text-center align-middle">
+      <thead class="thead-dark">
+        <tr>
+          <th>ユーザー名</th>
+          <th>メールアドレス</th>
+          <th>詳細</th>
+          <th>退会</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td>
+              <%= link_to '詳細', admin_dashboard_show_path(user.id), class: 'btn btn-info btn-sm' %>
+            </td>
+            <td>
+              <%= link_to '退会', admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center mt-4">
+    <%= link_to 'グループ一覧はこちら', admin_groups_path, class: 'btn btn-primary' %>
+  </div>
 </div>
