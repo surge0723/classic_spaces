@@ -6,14 +6,14 @@ class Admin::DashboardsController < ApplicationController
     end
     
     def show
-    @user = User.find(params[:id])
-    @spaces_list = @user.spaces
-    @spaces_comment = @user.comments.includes(:space) 
+        @user = User.find(params[:id])
+        @spaces_list = @user.spaces
+        @spaces_comment = @user.comments.includes(:space) 
     end
     
     def destroy
-      @comment = Comment.find(params[:id])
-      @comment.destroy
-      redirect_to admin_dashboards_path, notice: 'コメントが削除されました。'
+        @spaces_list = @user.spaces
+        @space_list.destroy
+        redirect_to admin_dashboards_path, notice: 'スペースを削除しました。'
     end
 end
