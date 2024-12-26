@@ -33,20 +33,21 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
               <li class="nav-item">
-                <%= link_to users_path, class: 'nav-link text-light' do %>
-                  ユーザー一覧
-                <% end %>
-              </li>
-              <li class="nav-item">
                 <%= link_to spaces_path, class: 'nav-link text-light' do %>
                   投稿一覧
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to groups_path, class: 'nav-link text-light' do %>
-                  グループ一覧
+                  グループ
                 <% end %>
               </li>
+              <li class="nav-item">
+                <%= link_to users_path, class: 'nav-link text-light' do %>
+                  ユーザー一覧
+                <% end %>
+              </li>
+
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user"></i>
