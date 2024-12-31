@@ -1,5 +1,5 @@
 class Public::SpacesController < ApplicationController
-   before_action :ensure_normal_user, only: :new
+   before_action :ensure_normal_user, only: :create
    
   def new
     @space=Space.new

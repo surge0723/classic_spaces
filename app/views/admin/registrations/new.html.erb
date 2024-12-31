@@ -1,35 +1,35 @@
-<div class="container">
+<div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-      <h2>管理者画面_新規登録_テスト画面</h2>
+    <div class="col-md-6">
+      <h2 class="text-center mb-4">管理者画面 - 新規登録</h2>
 
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      
-        <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "p-4 border rounded bg-light" }) do |f| %>
+        <div class="form-group">
+          <%= f.label :email, "メールアドレス", class: "form-label" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例: admin@example.com", class: "form-control" %>
         </div>
       
-        <div class="field">
-          <%= f.label :password %>
+        <div class="form-group">
+          <%= f.label :password, "パスワード", class: "form-label" %>
           <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password" %>
+            <small class="form-text text-muted">※ 最低 <%= @minimum_password_length %> 文字</small>
+          <% end %>
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワードを入力", class: "form-control" %>
         </div>
       
-        <div class="field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        <div class="form-group">
+          <%= f.label :password_confirmation, "パスワード確認", class: "form-label" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認用パスワードを入力", class: "form-control" %>
         </div>
       
-        <div class="actions">
-          <%= f.submit "Sign up" %>
+        <div class="text-center">
+          <%= f.submit "登録する", class: "btn btn-primary btn-block mt-3" %>
         </div>
       <% end %>
       
-      <%= render "admin/shared/links" %>
+      <div class="text-center mt-3">
+        <%= render "admin/shared/links" %>
+      </div>
     </div>
   </div>
 </div>
-      
